@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
+  [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(doRequest) userInfo:nil repeats:YES];
+}
+
+- (void)doRequest
+{
+  AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://localhost:3000"]];
+  
+  [client getPath:@"" parameters:@{}
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success!");
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"Failure.");
+   }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
