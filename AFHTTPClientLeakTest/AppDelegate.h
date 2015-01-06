@@ -8,7 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class AFHTTPRequestOperationManager;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+
+@property AFHTTPRequestOperationManager *client;
 
 - (void)doRequest;
 

@@ -22,14 +22,15 @@
                                                           diskCapacity:0
                                                               diskPath:nil];
   [NSURLCache setSharedURLCache:sharedCache];
+  
+  self.client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost:3000"]];
+  
   [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(doRequest) userInfo:nil repeats:YES];
 }
 
 - (void)doRequest
 {
-  AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://localhost:3000"]];
-  
-  [client getPath:@"" parameters:@{}
+  [self.client GET:@"" parameters:@{}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Success!");
           }
