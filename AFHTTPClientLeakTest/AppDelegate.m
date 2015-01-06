@@ -18,6 +18,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
+  NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                          diskCapacity:0
+                                                              diskPath:nil];
+  [NSURLCache setSharedURLCache:sharedCache];
   [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(doRequest) userInfo:nil repeats:YES];
 }
 

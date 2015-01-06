@@ -544,6 +544,11 @@ static BOOL AFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
 }
 
 - (void)finish {
+  
+  if (self.outputStream) {
+    [self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+  }
+  
     self.state = AFOperationFinishedState;
     
     dispatch_async(dispatch_get_main_queue(), ^{
